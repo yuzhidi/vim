@@ -28,9 +28,13 @@ let &termencoding=&encoding
 set fileencodings=utf-8,gbk 
 "很多插件都会要求的配置检测文件类型 
 :filetype on 
-:filetype plugin on 
+":filetype plugin on 
 :filetype indent on
 
 
 "map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-"map <F3> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen
+"map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen " /g will cause repeat on a sample line
+map <F4> :execute 'vimgrep /'.expand('<cword>').'/j '.expand('%') <Bar> cw<CR>
+map <F3> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
+"map <F3> :grep <cword> % 
+
