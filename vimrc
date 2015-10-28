@@ -31,10 +31,18 @@ set fileencodings=utf-8,gbk
 ":filetype plugin on 
 :filetype indent on
 
-
+"多级目录下用vimgrep效率太低
 "map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
 "map <F4> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') | copen " /g will cause repeat on a sample line
-map <F4> :execute 'vimgrep /'.expand('<cword>').'/j '.expand('%') <Bar> cw<CR>
-map <F3> :execute 'vimgrep /'.expand('<cword>').'/gj '.expand('%') <Bar> cw<CR>
-"map <F3> :grep <cword> % 
+
+map <F4> :execute 'vimgrep /\<'.expand('<cword>').'\>/j '.expand('%') <Bar> cw<CR>
+
+map <F3> :execute 'vimgrep /\<'.expand('<cword>').'\>/gj '.expand('%') <Bar> cw<CR>
+"ap <F2> :grep <cword> %
+
+" { high light cword, back to current line.
+" <CR><CR> equal type twice Entel to back from g/ result
+" <C-o> equal type Ctrl + O which back to current line as g/ will go to lask match result
+map <F2> :execute 'g /\<'.expand('<cword>').'\>' <CR><CR> <C-o>
+" }
 
